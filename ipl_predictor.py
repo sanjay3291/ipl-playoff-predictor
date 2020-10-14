@@ -27,8 +27,8 @@ first_cell_format.set_bold()
 currentPoints = { "mi":10, "dc":10, "rcb":10, "kkr":8, "srh":6, "csk":6, "rr":6, "kxip":2 }
 
 # List of remaining fixtures
-#gamesLeft = [ "dc:rr", "rcb:kxip", "mi:kkr", "rr:rcb", "dc:csk", "srh:kkr", "mi:kxip", "csk:rr", "kxip:dc", "kkr:rcb", "rr:srh", "csk:mi", "kkr:dc", "kxip:srh", "rcb:csk", "rr:mi", "kkr:kxip", "srh:dc", "mi:rcb", "csk:kkr", "kxip:rr", "dc:mi", "rcb:srh", "csk:kxip", "kkr:rr", "dc:rcb", "srh:mi"]
-gamesLeft = [ "dc:rr", "rcb:kxip", "mi:kkr"]
+gamesLeft = [ "dc:rr", "rcb:kxip", "mi:kkr", "rr:rcb", "dc:csk", "srh:kkr", "mi:kxip", "csk:rr", "kxip:dc", "kkr:rcb", "rr:srh", "csk:mi", "kkr:dc", "kxip:srh", "rcb:csk", "rr:mi", "kkr:kxip", "srh:dc", "mi:rcb", "csk:kkr", "kxip:rr", "dc:mi", "rcb:srh", "csk:kxip", "kkr:rr", "dc:rcb", "srh:mi"]
+#gamesLeft = [ "dc:rr", "rcb:kxip", "mi:kkr"]
 
 # sort teams in descending order of points
 teams = {k: v for k, v in sorted(currentPoints.items(), key=lambda item: item[1], reverse=True)}
@@ -115,7 +115,7 @@ sheet1.write(0, 2, 'Top 2 Possible on NRR', top_row_format)
 sheet1.write(0, 3, 'Top 4 Confirmed', top_row_format)
 sheet1.write(0, 4, 'Top 4 Possible on NRR', top_row_format)
 
-sheet1.set_column('A:A', 10)
+sheet1.set_column('A:A', 15)
 sheet1.set_column('B:E', 20)
 
 
@@ -223,7 +223,7 @@ for ii in range(0, 2):
 
 	# end sims
 
-	winTeamStr = "if {} wins".format(winTeamKey)
+	winTeamStr = "Change if {} wins".format(winTeamKey)
 
 	sheet1.write(10, ii*6, winTeamStr, first_cell_format)
 
@@ -234,15 +234,17 @@ for ii in range(0, 2):
 	sheet1.write(11, ii*6+3, 'Top 4 Confirmed', top_row_format)
 	sheet1.write(11, ii*6+4, 'Top 4 Possible on NRR', top_row_format)
 
-	sheet1.set_column('G:G', 10)
+	sheet1.set_column('G:G', 15)
 	sheet1.set_column('H:K', 20)
 
 	for i,team in enumerate(teams):
 		sheet1.write(i+12, ii*6, team)
-		sheet1.write(i+12, ii*6+1, str(new_Top2_Confirmed[team] * 100.0/combinations - Top2_Confirmed[team] * 100.0/combinations) + "%", data_format)
-		sheet1.write(i+12, ii*6+2, str(new_Top2_onNRR[team] * 100.0/combinations - Top2_onNRR[team] * 100.0/combinations) + "%", data_format)
-		sheet1.write(i+12, ii*6+3, str(new_Top4_Confirmed[team] * 100.0/combinations - Top4_Confirmed[team] * 100.0/combinations) + "%", data_format)
-		sheet1.write(i+12, ii*6+4, str(new_Top4_onNRR[team] * 100.0/combinations - Top4_onNRR[team] * 100.0/combinations) + "%", data_format)
+		sheet1.write(i+12, ii*6+1, str(new_Top2_Confirmed[team] * 100.0/new_combinations - Top2_Confirmed[team] * 100.0/combinations) + "%", data_format)
+		sheet1.write(i+12, ii*6+2, str(new_Top2_onNRR[team] * 100.0/new_combinations - Top2_onNRR[team] * 100.0/combinations) + "%", data_format)
+		sheet1.write(i+12, ii*6+3, str(new_Top4_Confirmed[team] * 100.0/new_combinations - Top4_Confirmed[team] * 100.0/combinations) + "%", data_format)
+		sheet1.write(i+12, ii*6+4, str(new_Top4_onNRR[team] * 100.0/new_combinations - Top4_onNRR[team] * 100.0/combinations) + "%", data_format)
 
+
+sheet1.insert_image('G2', 'Addendum.png', {'x_scale': 0.67, 'y_scale': 0.7})
 
 wb.close()
