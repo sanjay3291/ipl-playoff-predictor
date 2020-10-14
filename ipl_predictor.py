@@ -57,8 +57,8 @@ for team in teams:
 # run sims
 for run in range(0,combinations):
 
-	#print progress of script for every 500 sims
-	if run%500 == 0:
+	#print progress of script for every 10000 sims
+	if run%10000 == 0:
 		t=str(datetime.now())
 		print( "{}: Finsihed {:0,d} sims".format(t,run))
 
@@ -172,8 +172,8 @@ for ii in range(0, 2):
 	# run sims
 	for run in range(0,new_combinations):
 
-		#print progress of script for every 500 sims
-		if run%500 == 0:
+		#print progress of script for every 10000 sims
+		if run%10000 == 0:
 			t=str(datetime.now())
 			print( "{}: Finsihed {:0,d} sims".format(t,run))
 
